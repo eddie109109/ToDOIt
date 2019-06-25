@@ -11,7 +11,7 @@ import UIKit
 class ToDoListViewController: UITableViewController {
     
     
-    let itemArray = ["first", "second", "third"]
+    var itemArray = ["first", "second", "third"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,12 +39,43 @@ class ToDoListViewController: UITableViewController {
         } else {
             cell?.accessoryType = .checkmark
         }
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
     
-  
+    @IBAction func addItemPress(_ sender: Any) {
+        var text1 = UITextField()
+        let alert = UIAlertController(title: "Did you bring your towel?", message: "", preferredStyle: .alert)
+        
+        
+        let action = UIAlertAction(title: "Add an item", style: .default) { (UIAlertAction) in
+            
+            self.itemArray.append(text1.text!)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter your name"
+           text1 = textField
+            
+        }
+    
+        alert.addAction(action)
+        
+        for i in itemArray {
+            print(i)
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+        
+
+    }
+    
+    
+    
     
     
     
